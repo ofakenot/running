@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="meta-title">BRX Running — Convite Exclusivo</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF4D00; 
+            --bg-dark: #000000;
+            --bg-card: #111111;
+            --text-main: #FFFFFF;
+            --text-dim: #888888;
+            --accent-gradient: linear-gradient(135deg, #FF4D00 0%, #FF0000 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(255, 77, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 40%);
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+            mask-image: radial-gradient(circle, black, transparent 80%);
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .invitation-card {
+            width: 100%;
+            max-width: 600px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            position: relative;
+            padding: 80px 60px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            animation: slideUp 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .corner-accent {
+            position: absolute;
+            top: 0; right: 0;
+            width: 100px; height: 100px;
+            background: var(--accent-gradient);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .stripe-decor {
+            position: absolute;
+            left: -20px; top: 50%;
+            transform: translateY(-50%) rotate(-45deg);
+            display: flex; gap: 10px; opacity: 0.1;
+        }
+
+        .stripe { width: 15px; height: 400px; background: #fff; }
+
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 800;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .brand-logo-svg {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            transform: translateX(-5px); 
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #000;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .headline {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .headline span { color: var(--primary); }
+
+        .message {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+            max-width: 95%;
+            border-left: 2px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        .message b { color: var(--text-main); font-weight: 700; }
+
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-left: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            color: #FFF;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Kit Section */
+        .kit-preview {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .kit-preview:hover {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .kit-visual-container {
+            width: 56px; height: 56px;
+            background: rgba(255, 77, 0, 0.1);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .kit-svg-icon { width: 28px; height: 28px; color: var(--primary); }
+
+        .kit-info h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px; font-weight: 700;
+            text-transform: uppercase; margin-bottom: 4px;
+            color: #FFF; letter-spacing: 0.5px;
+        }
+
+        .kit-info p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: #FFF;
+            color: #000;
+            text-align: center;
+            padding: 25px;
+            text-decoration: none;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            background: var(--primary);
+            color: #FFF;
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 77, 0, 0.3);
+        }
+
+        .footer {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        .social-links { display: flex; gap: 20px; }
+        .social-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover { color: var(--primary); }
+
+        @media (max-width: 600px) {
+            .invitation-card { padding: 60px 30px; }
+            .headline { font-size: 36px; }
+            .footer { flex-direction: column; gap: 20px; }
+            .kit-preview { flex-direction: column; text-align: center; }
+            .stats-container { justify-content: center; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <div class="bg-grid"></div>
+
+    <div class="main-wrapper">
+        <main class="invitation-card">
+            <div class="corner-accent"></div>
+            <div class="stripe-decor">
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+            </div>
+
+            <div class="lang-switcher">
+                <button class="lang-btn" id="btn-pt" onclick="setLanguage('pt')">PT</button>
+                <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" id="btn-es" onclick="setLanguage('es')">ES</button>
+            </div>
+
+            <header class="header">
+                <svg class="brand-logo-svg" viewBox="0 0 290 64" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gH" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#FF4D00"/>
+                            <stop offset="100%" style="stop-color:#FF0000"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="0" y="42" font-family="'Unbounded', sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gH)" letter-spacing="-1">BRX</text>
+                    <text x="90" y="42" font-family="'Inter', sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="2">RUNNING</text>
+                    <rect x="0" y="52" width="66" height="4" fill="url(#gH)" rx="2"/>
+                </svg>
+            </header>
+
+            <span class="badge" data-i18n="badge">Acesso Exclusivo</span>
+
+            <h1 class="headline" id="headline"></h1>
+
+            <div class="message" id="message"></div>
+
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-value">08+</span>
+                    <span class="stat-label" data-i18n="stat_countries">Países</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">800+</span>
+                    <span class="stat-label" data-i18n="stat_members">Atletas</span>
+                </div>
+            </div>
+
+            <div class="kit-preview">
+                <div class="kit-visual-container">
+                    <svg class="kit-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 8L12 3L3 8V16L12 21L21 16V8Z" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 3V12" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 12L21 8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 12L3 8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 21V12" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="kit-info">
+                    <h3 data-i18n="kit_title">Member's Welcome Kit</h3>
+                    <p id="kit_desc"></p>
+                </div>
+            </div>
+
+            <a href="https://chat.whatsapp.com/Ij2GcVwrssGFTwvanXzlwB?mode=gi_t" class="cta-button" id="cta-text"></a>
+
+            <footer class="footer">
+                <div class="social-links">
+                    <a href="https://instagram.com/brxrunning" target="_blank">INSTAGRAM</a>
+                    <a href="https://bropharmaceutical.com/app" target="_blank" data-i18n="platform">PLATAFORMA</a>
+                </div>
+                <p class="copyright">© 2026 BRX COLLECTIVE</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        const translations = {
+            pt: {
+                title: "BRX Running — Convite Exclusivo",
+                badge: "Acesso Exclusivo",
+                headline: "Sua garra<br>tem o nosso <span>DNA</span>.",
+                message: "Existem pessoas que correm e existem aquelas que <b>entregam a alma</b> em cada quilômetro. O seu perfil transborda a garra e a resiliência que definem o que é ser BRX.",
+                stat_countries: "Países",
+                stat_members: "Atletas",
+                kit_title: "Member's Welcome Kit",
+                kit_desc: "O seu <b>Kit Oficial BRX</b> será enviado com muito carinho para o seu endereço após a confirmação. Esperamos por você.",
+                cta: "Fazer parte da família BRX",
+                platform: "PLATAFORMA"
+            },
+            en: {
+                title: "BRX Running — Exclusive Invitation",
+                badge: "Exclusive Access",
+                headline: "Your grit<br>has our <span>DNA</span>.",
+                message: "There are people who run and there are those who <b>give their soul</b> in every mile. Your profile overflows with the grit and resilience that define what it means to be BRX.",
+                stat_countries: "Countries",
+                stat_members: "Athletes",
+                kit_title: "Member's Welcome Kit",
+                kit_desc: "Your <b>Official BRX Kit</b> will be sent with great care to your address after confirmation. We are waiting for you.",
+                cta: "Join the BRX family",
+                platform: "PLATFORM"
+            },
+            es: {
+                title: "BRX Running — Invitación Exclusiva",
+                badge: "Acceso Exclusivo",
+                headline: "Tu garra<br>tiene nuestro <span>ADN</span>.",
+                message: "Hay personas que corren y hay quienes <b>entregan el alma</b> en cada kilómetro. Tu perfil desborda la garra y la resiliencia que definen lo que es ser BRX.",
+                stat_countries: "Países",
+                stat_members: "Atletas",
+                kit_title: "Member's Welcome Kit",
+                kit_desc: "Tu <b>Kit Oficial BRX</b> será enviado con mucho cariño a tu dirección tras la confirmación. Te esperamos.",
+                cta: "Formar parte de la familia BRX",
+                platform: "PLATAFORMA"
+            }
+        };
+
+        function setLanguage(lang) {
+            const translation = translations[lang];
+            document.getElementById('meta-title').innerText = translation.title;
+            document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = translation[el.getAttribute('data-i18n')]);
+            document.getElementById('headline').innerHTML = translation.headline;
+            document.getElementById('message').innerHTML = translation.message;
+            document.getElementById('kit_desc').innerHTML = translation.kit_desc;
+            document.getElementById('cta-text').innerText = translation.cta;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            localStorage.setItem('brx_lang', lang);
+        }
+
+        const savedLang = localStorage.getItem('brx_lang') || 'pt';
+        setLanguage(savedLang);
+    </script>
+</body>
+</html>
