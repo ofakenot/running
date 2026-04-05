@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title data-i18n="page_title">BRX Running — Junte-se ao Grupo</title>
+<style>
+:root {
+  --bg:         #050505;
+  --white:      #f0ebe3;
+  --dim:        rgba(240,235,227,.55);
+  --accent:     #ff4d4d;
+  --accent2:    #f97316;
+  --adim:       rgba(255,77,77,.12);
+  --aborder:    rgba(255,77,77,.3);
+  --b:          rgba(255,255,255,.065);
+  --gray:       #6e6e6e;
+  --gray2:      #2e2e2e;
+  --gold:       #c8b97a;
+  --r:          12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9000;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  opacity:.4;
+}
+
+/* ── GRAD HELPER ── */
+.grad{background:linear-gradient(90deg,#ff4d4d,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:22px 52px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:padding .4s,background .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.stuck{
+  padding:14px 52px;
+  background:rgba(5,5,5,.9);
+  border-bottom-color:var(--b);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.nav-right{display:flex;align-items:center;gap:28px;}
+.nav-link{
+  font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;transition:color .2s;
+}
+.nav-link:hover{color:var(--white);}
+.nav-cta{
+  font-family:'Unbounded',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:#fff;text-decoration:none;
+  background:linear-gradient(135deg,#ff4d4d,#f97316);
+  padding:11px 22px;border-radius:3px;
+  transition:transform .3s,box-shadow .3s;white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(255,77,77,.35);}
+@media(max-width:768px){
+  nav{padding:16px 20px;}nav.stuck{padding:12px 20px;}
+  .nav-link{display:none;}
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:120px 24px 80px;
+}
+.hero-photo{
+  position:absolute;inset:0;z-index:0;
+  background:
+    linear-gradient(180deg,rgba(5,5,5,.75) 0%,rgba(5,5,5,.6) 35%,rgba(5,5,5,.88) 80%,#050505 100%),
+    linear-gradient(90deg,rgba(5,5,5,.85) 0%,rgba(5,5,5,.5) 60%,rgba(5,5,5,.3) 100%),
+    url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-size:cover;background-position:center;
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;z-index:1;
+  background:radial-gradient(circle,rgba(255,77,77,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-lines{
+  position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;
+}
+.hero-lines::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:repeating-linear-gradient(45deg,transparent,transparent 100px,rgba(255,77,77,.02) 100px,rgba(255,77,77,.02) 101px);
+}
+.hero-body{position:relative;z-index:10;text-align:center;max-width:900px;}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.05);border:1px solid var(--b);
+  padding:8px 16px;border-radius:100px;
+  font-family:'Unbounded',sans-serif;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:32px;
+}
+.badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--accent);}
+.hero-logo-wrap{margin-bottom:24px;display:flex;justify-content:center;}
+.hero-h1{
+  font-family:'Unbounded',sans-serif;font-size:clamp(40px,8vw,90px);font-weight:900;
+  line-height:.95;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:32px;
+}
+.hero-h1 span{display:block;}
+.hero-h1 .outline{
+  color:transparent;-webkit-text-stroke:1px var(--white);opacity:.8;
+}
+.hero-sub{
+  font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--dim);
+  max-width:600px;margin:0 auto 48px;
+}
+.hero-actions{display:flex;gap:20px;justify-content:center;align-items:center;}
+.btn-wa{
+  background:linear-gradient(135deg,#ff4d4d,#f97316);
+  color:#fff;text-decoration:none;
+  padding:20px 40px;border-radius:6px;
+  font-family:'Unbounded',sans-serif;font-size:13px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.05em;
+  display:flex;align-items:center;gap:12px;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-wa:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(255,77,77,.4);}
+.btn-wa svg{width:20px;height:20px;}
+.btn-ghost{
+  color:var(--white);text-decoration:none;
+  font-family:'Unbounded',sans-serif;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  display:flex;align-items:center;gap:10px;
+  padding:20px;transition:opacity .2s;
+}
+.btn-ghost:hover{opacity:.7;}
+
+/* ── STATS ── */
+.stats-bar{
+  background:rgba(255,255,255,.02);border-top:1px solid var(--b);border-bottom:1px solid var(--b);
+  padding:40px 24px;
+}
+.stats-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:40px;
+}
+.stat-block{text-align:center;}
+.stat-num{
+  display:block;font-family:'Unbounded',sans-serif;font-size:32px;font-weight:800;
+  margin-bottom:8px;color:var(--white);
+}
+.stat-lbl{
+  display:block;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--gray);font-weight:700;
+}
+@media(max-width:768px){
+  .hero{padding-top:100px;min-height:auto;}
+  .hero-actions{flex-direction:column;width:100%;}
+  .btn-wa{width:100%;justify-content:center;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);gap:30px;}
+}
+
+/* ── I18N & HAMBURGER ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1100;
+  padding: 10px;
+}
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background-color: var(--white);
+  transition: 0.3s;
+}
+.nav-menu-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.lang-switcher {
+  display: flex;
+  gap: 5px;
+  background: rgba(255,255,255,0.05);
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid var(--b);
+  margin-right: 15px;
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--dim);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+@media(max-width:768px){
+  .hamburger { display: flex; }
+  .nav-menu-wrapper {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(5,5,5,0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 100px 30px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 1px solid var(--b);
+    align-items: flex-start;
+    z-index: 1050;
+  }
+  .nav-menu-wrapper.active { right: 0; }
+  .nav-right {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    width: 100%;
+    gap: 20px !important;
+  }
+  .nav-link { display: block !important; font-size: 14px !important; }
+  .lang-switcher { margin-bottom: 30px; }
+}
+
+/* ── SOCIETY BRIDGE ── */
+.society-bridge{padding:100px 24px;background:linear-gradient(180deg,#050505 0%,#0a0a0a 100%);}
+.society-inner{
+  max-width:1200px;margin:0 auto;
+  background:rgba(255,255,255,.02);border:1px solid var(--b);
+  padding:60px;border-radius:var(--r);
+  display:flex;justify-content:space-between;align-items:center;gap:40px;
+}
+.soc-eyebrow{
+  display:block;color:var(--gold);font-family:'Unbounded',sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;margin-bottom:16px;
+}
+.soc-title{
+  font-family:'Unbounded',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:800;
+  line-height:1.2;margin-bottom:20px;
+}
+.soc-desc{color:var(--dim);max-width:500px;line-height:1.6;}
+.btn-gold{
+  background:var(--gold);color:#000;text-decoration:none;
+  padding:20px 40px;border-radius:4px;
+  font-family:'Unbounded',sans-serif;font-size:12px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.1em;
+  display:flex;align-items:center;gap:12px;transition:transform .3s;
+}
+.btn-gold:hover{transform:translateY(-3px);}
+@media(max-width:992px){
+  .society-inner{flex-direction:column;text-align:center;padding:40px 24px;}
+  .btn-gold{width:100%;justify-content:center;}
+}
+
+/* ── SCHEDULE ── */
+.day-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 200px;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.day-row:hover { background: rgba(255,255,255,0.02); padding-left: 20px; }
+.day-name { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; text-transform: uppercase; }
+.day-type { color: #888; font-size: 1rem; line-height: 1.4; }
+.day-time { font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 600; color: #ff4d4d; text-align: right; }
+@media (max-width: 768px) {
+  .day-row { grid-template-columns: 1fr; gap: 10px; text-align: left; padding: 25px 0; }
+  .day-time { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <svg width="210" height="46" viewBox="0 0 290 58" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="gN" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#ff4d4d"/><stop offset="100%" style="stop-color:#f97316"/></linearGradient></defs>
+    <text x="0" y="42" font-family="'Verdana',sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gN)" letter-spacing="-1">BRX</text>
+    <text x="88" y="42" font-family="'Inter',sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="2">RUNNING</text>
+    <rect x="0" y="50" width="66" height="4" fill="url(#gN)" rx="2"/>
+  </svg>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-menu-wrapper" id="nav-menu-wrapper">
+    <div class="lang-switcher">
+      <button class="lang-btn" id="lang-pt" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
+    </div>
+    <div class="nav-right">
+      <a class="nav-link" href="#paises" data-i18n="nav_paises">Países</a>
+      <a class="nav-link" href="#treinos" data-i18n="nav_treinos">Treinos</a>
+      <a class="nav-link" href="#entrar" data-i18n="nav_entrar">Como Entrar</a>
+      <a class="nav-cta" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" target="_blank" rel="noopener" data-i18n="nav_btn">Grupo WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-body">
+    <span class="badge"><span class="badge-dot"></span><span data-i18n="hero_badge">Grupo Oficial · WhatsApp</span></span>
+    <div class="hero-logo-wrap">
+      <svg width="320" height="64" viewBox="0 0 290 58" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="gH" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#ff4d4d"/><stop offset="100%" style="stop-color:#f97316"/></linearGradient></defs>
+        <text x="0" y="42" font-family="'Verdana',sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gH)" letter-spacing="-1">BRX</text>
+        <text x="88" y="42" font-family="'Inter',sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="2">RUNNING</text>
+        <rect x="0" y="50" width="66" height="4" fill="url(#gH)" rx="2"/>
+      </svg>
+    </div>
+    <h1 class="hero-h1">
+      <span class="grad" data-i18n="hero_h1_1">Corra Além</span>
+      <span class="outline" data-i18n="hero_h1_2">das Fronteiras.</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">Uma comunidade global de corredores de alta performance. Treinos diários, corridas internacionais e conexões que vão além da linha de chegada.</p>
+    <div class="hero-actions">
+      <a class="btn-wa" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="hero_btn_wa">Entrar no Grupo</span>
+      </a>
+      <a class="btn-ghost" href="#paises"><span data-i18n="hero_btn_paises">Ver Países</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-block"><span class="stat-num">874+</span><span class="stat-lbl" data-i18n="stat_members">Membros Ativos</span></div>
+    <div class="stat-block"><span class="stat-num">8</span><span class="stat-lbl" data-i18n="stat_countries">Países</span></div>
+    <div class="stat-block"><span class="stat-num">5x</span><span class="stat-lbl" data-i18n="stat_trains">Treinos / Semana</span></div>
+    <div class="stat-block"><span class="stat-num">100%</span><span class="stat-lbl" data-i18n="stat_free">Gratuito</span></div>
+  </div>
+</div>
+
+<section id="paises" style="background: #000; padding: 100px 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  
+  <div style="max-width: 1200px; margin: 0 auto 60px auto; text-align: left;">
+    <span style="color: #444; text-transform: uppercase; font-size: 11px; letter-spacing: 4px; display: block; margin-bottom: 12px; font-weight: 700;" data-i18n="paises_tag">Presença Global</span>
+    <h2 style="color: #fff; font-size: 48px; font-weight: 800; line-height: 1; margin: 0; letter-spacing: -2px;" data-i18n="paises_title">Rotas da<br><span style="background: linear-gradient(90deg, #ff4d4d, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Comunidade BRX</span></h2>
+  </div>
+
+  <div class="countries-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; align-items: start;">
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/1200x/04/76/77/04767761ed3f4bf5d58cb7e693b01441.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇧🇷</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">São Paulo</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • Maratona Internacional de SP<br>
+          • SP City Marathon<br>
+          • Meia Internacional de SP
+        </div>
+      </div>
+    </details>
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/1200x/23/40/8b/23408b04b686a46244d7da6612c927fe.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇵🇾</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">Paraguai</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • Maratón de Asunción<br>
+          • Internacional de Ciudad del Este<br>
+          • Desafío Chaco Trail
+        </div>
+      </div>
+    </details>
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/1200x/1f/6c/92/1f6c924f8e7e1a6f802fc10b63888a96.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇨🇱</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">Chile</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • Maratón de Santiago<br>
+          • Patagonian Expedition Race<br>
+          • Viña del Mar Half Marathon
+        </div>
+      </div>
+    </details>
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/736x/7c/0d/35/7c0d35d2b0753032ad6e249eafd8700d.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇦🇪</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">Dubai</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • Dubai Marathon<br>
+          • Dubai Run<br>
+          • Desert Road Runners
+        </div>
+      </div>
+    </details>
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/1200x/c1/d0/d5/c1d0d5b3a55b5f11bbcdf3d56a704e91.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇺🇸</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">Estados Unidos</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • NYC Marathon<br>
+          • Miami Half Marathon<br>
+          • Boston Marathon
+        </div>
+      </div>
+    </details>
+
+    <details name="rota" class="brx-card" style="background: #0a0a0a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; cursor: pointer;">
+      <summary style="list-style: none; outline: none; position: relative; height: 350px;">
+        <div class="card-bg" style="position: absolute; inset: 0; background-image: url('https://i.pinimg.com/736x/98/98/c1/9898c157097d2bfd2fbd2e54e82fbe27.jpg'); background-size: cover; background-position: center; filter: brightness(0.4);"></div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 35px; background: linear-gradient(to top, #000 20%, transparent);">
+          <span style="font-size: 24px;">🇬🇧</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="color: #fff; font-size: 24px; font-weight: 800;">Londres</div>
+            <svg class="orange-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          </div>
+        </div>
+      </summary>
+      <div class="card-info" style="padding: 30px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #ff4d4d; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px;" data-i18n="paises_challenges">Principais Desafios</p>
+        <div style="color: #ccc; font-size: 14px; line-height: 2;">
+          • London Marathon<br>
+          • Royal Parks Half<br>
+          • Hackney Half
+        </div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section class="schedule" id="treinos" style="background: #000; padding: 100px 20px; font-family: -apple-system, sans-serif;">
+  <div class="schedule-inner" style="max-width: 1200px; margin: 0 auto;">
+    <div class="sch-head" style="margin-bottom: 60px; max-width: 600px;">
+      <span class="sec-tag" style="color: #444; text-transform: uppercase; font-size: 11px; letter-spacing: 4px; font-weight: 700; display: block; margin-bottom: 12px;" data-i18n="sch_tag">Calendário de Treinos</span>
+      <h2 class="sec-title" style="color: #fff; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin: 0 0 20px 0; letter-spacing: -2px; text-transform: uppercase; font-style: italic;">
+        <span data-i18n="sch_h2_1">5x por Semana,</span><br>
+        <span class="grad" style="background: linear-gradient(90deg, #ff4d4d, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-right: 10px;" data-i18n="sch_h2_2">Sem Desculpas</span>
+      </h2>
+      <p class="sec-desc" style="color: rgba(255,255,255,0.5); font-size: 1.1rem; line-height: 1.6;" data-i18n="sch_desc">Nossa planilha é focada em performance e consistência. Adaptamos os volumes para quem está começando ou buscando o sub-3.</p>
+    </div>
+
+    <div class="sch-list">
+      <div class="day-row">
+        <div class="day-name" data-i18n="day_mon">Segunda</div>
+        <div class="day-type" data-i18n="day_mon_desc">Recuperação Ativa ou Descanso</div>
+        <div class="day-time">06:00 AM</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name" data-i18n="day_tue">Terça</div>
+        <div class="day-type" data-i18n="day_tue_desc">Treino de Tiros (Intervalado)</div>
+        <div class="day-time">06:00 AM</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name" data-i18n="day_wed">Quarta</div>
+        <div class="day-type" data-i18n="day_wed_desc">Rodagem Leve (Z2)</div>
+        <div class="day-time">06:00 AM</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name" data-i18n="day_thu">Quinta</div>
+        <div class="day-type" data-i18n="day_thu_desc">Tempo Run (Ritmo de Prova)</div>
+        <div class="day-time">06:00 AM</div>
+      </div>
+      <div class="day-row">
+        <div class="day-name" data-i18n="day_sat">Sábado</div>
+        <div class="day-type" data-i18n="day_sat_desc">Longão da Comunidade</div>
+        <div class="day-time">07:00 AM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="feat-row" style="background:#080808; border-top:1px solid #1a1a1a; border-bottom:1px solid #1a1a1a; padding: 80px 20px; font-family: sans-serif;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span class="sec-tag" style="display:inline-block; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; color: #888; margin-bottom: 12px; border: 1px solid #333; padding: 4px 12px; border-radius: 50px;" data-i18n="feat_tag">O que você recebe</span>
+      <h2 class="sec-title" style="text-align:center; color: #fff; font-size: 3rem; font-weight: 800; line-height: 1.1; margin: 0;">
+        <span data-i18n="feat_h2_1">Muito além</span><br>
+        <span class="grad" style="background: linear-gradient(90deg, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" data-i18n="feat_h2_2">dos km rodados</span>
+      </h2>
+    </div>
+
+    <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; padding:0;">
+      <div class="feat-card" style="background: #111; border: 1px solid #222; padding: 40px 30px; border-radius: 20px;">
+        <div class="feat-icon" style="color: #fff; margin-bottom: 24px; width: 40px; height: 40px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="feat-title" style="color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 12px;" data-i18n="feat_1_title">Treinos Diários</div>
+        <div class="feat-desc" style="color: #888; line-height: 1.6; font-size: 0.95rem;" data-i18n="feat_1_desc">Planilha semanal com volume, intensidade e objetivos compartilhados direto no grupo todas as manhãs.</div>
+      </div>
+      <div class="feat-card" style="background: #111; border: 1px solid #222; padding: 40px 30px; border-radius: 20px;">
+        <div class="feat-icon" style="color: #fff; margin-bottom: 24px; width: 40px; height: 40px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="feat-title" style="color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 12px;" data-i18n="feat_2_title">Corridas Internacionais</div>
+        <div class="feat-desc" style="color: #888; line-height: 1.6; font-size: 0.95rem;" data-i18n="feat_2_desc">Acesso ao calendário de corridas em 8 países com orientação de inscrição, logística e treino específico.</div>
+      </div>
+      <div class="feat-card" style="background: #111; border: 1px solid #222; padding: 40px 30px; border-radius: 20px;">
+        <div class="feat-icon" style="color: #fff; margin-bottom: 24px; width: 40px; height: 40px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feat-title" style="color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 12px;" data-i18n="feat_3_title">Comunidade Real</div>
+        <div class="feat-desc" style="color: #888; line-height: 1.6; font-size: 0.95rem;" data-i18n="feat_3_desc">874+ corredores ativos de alto nível. Encontros presenciais, long runs coletivos e amizades duradouras.</div>
+      </div>
+      <div class="feat-card" style="background: #111; border: 1px solid #222; padding: 40px 30px; border-radius: 20px;">
+        <div class="feat-icon" style="color: #fff; margin-bottom: 24px; width: 40px; height: 40px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="feat-title" style="color: #fff; font-size: 1.25rem; font-weight: 600; margin-bottom: 12px;" data-i18n="feat_4_title">Desafios & Rankings</div>
+        <div class="feat-desc" style="color: #888; line-height: 1.6; font-size: 0.95rem;" data-i18n="feat_4_desc">Ranking mensal de distância, pace e evolução. Premiações para os mais consistentes do grupo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN / CTA -->
+<section class="join" id="entrar" style="background: #000; padding: 100px 20px;">
+  <div class="join-inner" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 60px;">
+    <div>
+      <span class="sec-tag" style="color: #444; text-transform: uppercase; font-size: 11px; letter-spacing: 4px; font-weight: 700; display: block; margin-bottom: 12px;" data-i18n="join_tag">Como Participar</span>
+      <h2 class="sec-title" style="margin-bottom:60px; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; color: #fff; letter-spacing: -2px; text-transform: uppercase; font-style: italic;">
+        <span data-i18n="join_h2_1">3 passos para</span><br>
+        <span class="grad" data-i18n="join_h2_2">começar a correr</span><br>
+        <span data-i18n="join_h2_3">com a gente</span>
+      </h2>
+      <div class="join-steps" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+        <div class="join-step" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: flex-start; gap: 20px;">
+            <div class="join-num" style="font-family: 'Unbounded', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--accent); min-width: 60px;">01</div>
+            <div>
+              <div class="join-step-title" style="font-weight: 700; font-size: 1.2rem; margin-bottom: 12px; color: #fff;" data-i18n="step_1_title">Clique no botão abaixo</div>
+              <div class="join-step-desc" style="color: var(--dim); line-height: 1.6; font-size: 0.95rem;" data-i18n="step_1_desc">Acesse o link direto para o grupo oficial da BRX Running no WhatsApp. Entrada imediata, sem aprovação necessária.</div>
+            </div>
+          </div>
+        </div>
+        <div class="join-step" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: flex-start; gap: 20px;">
+            <div class="join-num" style="font-family: 'Unbounded', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--accent); min-width: 60px;">02</div>
+            <div>
+              <div class="join-step-title" style="font-weight: 700; font-size: 1.2rem; margin-bottom: 12px; color: #fff;" data-i18n="step_2_title">Apresente-se no grupo</div>
+              <div class="join-step-desc" style="color: var(--dim); line-height: 1.6; font-size: 0.95rem;" data-i18n="step_2_desc">Diga sua cidade, distâncias favoritas e objetivos. A comunidade vai te receber e indicar os treinos do seu nível.</div>
+            </div>
+          </div>
+        </div>
+        <div class="join-step" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; align-items: flex-start; gap: 20px;">
+            <div class="join-num" style="font-family: 'Unbounded', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--accent); min-width: 60px;">03</div>
+            <div>
+              <div class="join-step-title" style="font-weight: 700; font-size: 1.2rem; margin-bottom: 12px; color: #fff;" data-i18n="step_3_title">Conecte rotas e corredores</div>
+              <div class="join-step-desc" style="color: var(--dim); line-height: 1.6; font-size: 0.95rem;" data-i18n="step_3_desc">Use o grupo para marcar long runs, compartilhar PRs, perguntar sobre corridas e encontrar parceiros de treino na sua cidade.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="join-cta" style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start;">
+        <a class="btn-wa" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" target="_blank" rel="noopener" style="display: inline-flex; justify-content: center; width: auto;">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-i18n="join_btn">Entrar no Grupo Agora</span>
+        </a>
+        <p class="join-note" style="font-size: 11px; color: #666;" data-i18n="join_note">Gratuito · Comunidade ativa · Saia quando quiser</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .join-steps { grid-template-columns: 1fr !important; }
+    .join-num { font-size: 2rem !important; }
+    .sec-title { font-size: 2rem !important; }
+  }
+</style>
+
+<!-- SOCIETY BRIDGE -->
+<section class="society-bridge">
+  <div class="society-inner">
+    <div>
+      <span class="soc-eyebrow" data-i18n="soc_tag">Próximo Nível</span>
+      <h3 class="soc-title">
+        <span data-i18n="soc_h3_1">Já corre com a gente?</span><br>
+        <span style="color:var(--gold);" data-i18n="soc_h3_2">Conheça a BRX Society.</span>
+      </h3>
+      <p class="soc-desc" data-i18n="soc_desc">A BRX Society é o ecossistema fechado de empresários que correm. Estratégia de negócios de 8 dígitos e alta performance física — juntos.</p>
+    </div>
+    <a class="btn-gold" href="https://brxsociety.com" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span data-i18n="soc_btn">Ver BRX Society</span>
+    </a>
+  </div>
+</section>
+
+<footer style="background: #000; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+    <div style="opacity: 0.9;">
+      <svg width="180" height="40" viewBox="0 0 280 58" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="gF" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#ff4d4d"/><stop offset="100%" style="stop-color:#f97316"/></linearGradient></defs>
+        <text x="0" y="42" font-family="sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gF)" letter-spacing="-1">BRX</text>
+        <text x="82" y="42" font-family="sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="1">RUNNING</text>
+        <rect x="0" y="50" width="66" height="4" fill="url(#gF)" rx="2"/>
+      </svg>
+    </div>
+    <a href="https://instagram.com/brxrunning" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s ease;">
+      <span style="letter-spacing: 1px;">@brxrunning</span>
+      <div style="background: rgba(255,255,255,0.05); padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </div>
+    </a>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  pt: {
+    page_title: "BRX Running — Junte-se ao Grupo",
+    nav_paises: "Países", nav_treinos: "Treinos", nav_entrar: "Como Entrar", nav_btn: "Grupo WhatsApp",
+    hero_badge: "Grupo Oficial · WhatsApp", hero_h1_1: "Corra Além", hero_h1_2: "das Fronteiras.",
+    hero_sub: "Uma comunidade global de corredores de alta performance. Treinos diários, corridas internacionais e conexões que vão além da linha de chegada.",
+    hero_btn_wa: "Entrar no Grupo", hero_btn_paises: "Ver Países", 
+    stat_members: "Membros Ativos", stat_countries: "Países", stat_trains: "Treinos / Semana", stat_free: "Gratuito",
+    paises_tag: "Presença Global", paises_title: "Rotas da Comunidade BRX", paises_challenges: "Principais Desafios",
+    sch_tag: "Calendário de Treinos", sch_h2_1: "5x por Semana,", sch_h2_2: "Sem Desculpas",
+    sch_desc: "Nossa planilha é focada em performance e consistência. Adaptamos os volumes para quem está começando ou buscando o sub-3.",
+    day_mon: "Segunda", day_mon_desc: "Recuperação Ativa ou Descanso",
+    day_tue: "Terça", day_tue_desc: "Treino de Tiros (Intervalado)",
+    day_wed: "Quarta", day_wed_desc: "Rodagem Leve (Z2)",
+    day_thu: "Quinta", day_thu_desc: "Tempo Run (Ritmo de Prova)",
+    day_sat: "Sábado", day_sat_desc: "Longão da Comunidade",
+    feat_tag: "O que você recebe", feat_h2_1: "Muito além", feat_h2_2: "dos km rodados",
+    feat_1_title: "Treinos Diários", feat_1_desc: "Planilha semanal com volume, intensidade e objetivos compartilhados direto no grupo todas as manhãs.",
+    feat_2_title: "Corridas Internacionais", feat_2_desc: "Acesso ao calendário de corridas em 8 países com orientação de inscrição, logística e treino específico.",
+    feat_3_title: "Comunidade Real", feat_3_desc: "874+ corredores ativos de alto nível. Encontros presenciais, long runs coletivos e amizades duradouras.",
+    feat_4_title: "Desafios & Rankings", feat_4_desc: "Ranking mensal de distância, pace e evolução. Premiações para os mais consistentes do grupo.",
+    join_tag: "Como Participar", join_h2_1: "3 passos para", join_h2_2: "começar a correr", join_h2_3: "com a gente",
+    step_1_title: "Clique no botão abaixo", step_1_desc: "Acesse o link direto para o grupo oficial da BRX Running no WhatsApp. Entrada imediata, sem aprovação necessária.",
+    step_2_title: "Apresente-se no grupo", step_2_desc: "Diga sua cidade, distâncias favoritas e objetivos. A comunidade vai te receber e indicar os treinos do seu nível.",
+    step_3_title: "Conecte rotas e corredores", step_3_desc: "Use o grupo para marcar long runs, compartilhar PRs, perguntar sobre corridas e encontrar parceiros de treino na sua cidade.",
+    join_box_1: "Pronto para", join_box_2: "dar o primeiro passo?",
+    join_box_desc: "O grupo é gratuito, aberto a todos os níveis e movido por quem leva a performance a sério. Um clique separa você da comunidade.",
+    join_btn: "Entrar no Grupo Agora", join_note: "Gratuito · Comunidade ativa · Saia quando quiser",
+    soc_tag: "Próximo Nível", soc_h3_1: "Já corre com a gente?", soc_h3_2: "Conheça a BRX Society.",
+    soc_desc: "A BRX Society é o ecossistema fechado de empresários que correm. Estratégia de negócios de 8 dígitos e alta performance física — juntos.",
+    soc_btn: "Ver BRX Society"
+  },
+  en: {
+    page_title: "BRX Running — Join the Group",
+    nav_paises: "Countries", nav_treinos: "Training", nav_entrar: "How to Join", nav_btn: "WhatsApp Group",
+    hero_badge: "Official Group · WhatsApp", hero_h1_1: "Run Beyond", hero_h1_2: "Borders.",
+    hero_sub: "A global community of high-performance runners. Daily workouts, international races, and connections that go beyond the finish line.",
+    hero_btn_wa: "Join the Group", hero_btn_paises: "See Countries", 
+    stat_members: "Active Members", stat_countries: "Countries", stat_trains: "Workouts / Week", stat_free: "Free",
+    paises_tag: "Global Presence", paises_title: "BRX Community Routes", paises_challenges: "Main Challenges",
+    sch_tag: "Training Schedule", sch_h2_1: "5x per Week,", sch_h2_2: "No Excuses",
+    sch_desc: "Our plan is focused on performance and consistency. We adapt volumes for beginners or those seeking sub-3.",
+    day_mon: "Monday", day_mon_desc: "Active Recovery or Rest",
+    day_tue: "Tuesday", day_tue_desc: "Speed Work (Intervals)",
+    day_wed: "Wednesday", day_wed_desc: "Easy Run (Z2)",
+    day_thu: "Thursday", day_thu_desc: "Tempo Run (Race Pace)",
+    day_sat: "Saturday", day_sat_desc: "Community Long Run",
+    feat_tag: "What you get", feat_h2_1: "Way beyond", feat_h2_2: "the miles run",
+    feat_1_title: "Daily Workouts", feat_1_desc: "Weekly spreadsheet with volume, intensity, and goals shared directly in the group every morning.",
+    feat_2_title: "International Races", feat_2_desc: "Access to the race calendar in 8 countries with registration guidance, logistics, and specific training.",
+    feat_3_title: "Real Community", feat_3_desc: "874+ high-level active runners. In-person meetups, collective long runs, and lasting friendships.",
+    feat_4_title: "Challenges & Rankings", feat_4_desc: "Monthly distance, pace, and evolution rankings. Awards for the most consistent in the group.",
+    join_tag: "How to Participate", join_h2_1: "3 steps to", join_h2_2: "start running", join_h2_3: "with us",
+    step_1_title: "Click the button below", step_1_desc: "Access the direct link to the official BRX Running WhatsApp group. Immediate entry, no approval needed.",
+    step_2_title: "Introduce yourself", step_2_desc: "Tell us your city, favorite distances, and goals. The community will welcome you and suggest workouts for your level.",
+    step_3_title: "Connect routes and runners", step_3_desc: "Use the group to schedule long runs, share PRs, ask about races, and find training partners in your city.",
+    join_box_1: "Ready to", join_box_2: "take the first step?",
+    join_box_desc: "The group is free, open to all levels, and driven by those who take performance seriously. One click separates you from the community.",
+    join_btn: "Join the Group Now", join_note: "Free · Active Community · Leave anytime",
+    soc_tag: "Next Level", soc_h3_1: "Already running with us?", soc_h3_2: "Meet BRX Society.",
+    soc_desc: "BRX Society is the closed ecosystem for entrepreneurs who run. 8-digit business strategy and high physical performance — together.",
+    soc_btn: "View BRX Society"
+  },
+  es: {
+    page_title: "BRX Running — Únete al Grupo",
+    nav_paises: "Países", nav_treinos: "Entrenamientos", nav_entrar: "Cómo Entrar", nav_btn: "Grupo WhatsApp",
+    hero_badge: "Grupo Oficial · WhatsApp", hero_h1_1: "Corre Más Allá", hero_h1_2: "de las Fronteras.",
+    hero_sub: "Una comunidad global de corredores de alto rendimiento. Entrenamientos diarios, carreras internacionales y conexiones que van más allá de la meta.",
+    hero_btn_wa: "Unirse al Grupo", hero_btn_paises: "Ver Países", 
+    stat_members: "Miembros Activos", stat_countries: "Países", stat_trains: "Entrenos / Semana", stat_free: "Gratis",
+    paises_tag: "Presencia Global", paises_title: "Rutas de la Comunidad BRX", paises_challenges: "Principales Desafíos",
+    sch_tag: "Calendario de Entrenamientos", sch_h2_1: "5x por Semana,", sch_h2_2: "Sin Excusas",
+    sch_desc: "Nuestro plan se centra en el rendimiento y la consistencia. Adaptamos los volúmenes para principiantes o para quienes buscan el sub-3.",
+    day_mon: "Lunes", day_mon_desc: "Recuperación Activa o Descanso",
+    day_tue: "Martes", day_tue_desc: "Entrenamiento de Series (Intervalos)",
+    day_wed: "Miércoles", day_wed_desc: "Rodaje Suave (Z2)",
+    day_thu: "Jueves", day_thu_desc: "Tempo Run (Ritmo de Carrera)",
+    day_sat: "Sábado", day_sat_desc: "Tirada Larga Comunitaria",
+    feat_tag: "Lo que recibes", feat_h2_1: "Mucho más allá", feat_h2_2: "de los km recorridos",
+    feat_1_title: "Entrenamientos Diarios", feat_1_desc: "Planilla semanal con volumen, intensidad y objetivos compartidos directamente en el grupo cada mañana.",
+    feat_2_title: "Carreras Internacionales", feat_2_desc: "Acceso al calendario de carreras en 8 países con orientación de inscripción, logística y entrenamiento específico.",
+    feat_3_title: "Comunidad Real", feat_3_desc: "874+ corredores activos de alto nivel. Encuentros presenciales, tiradas largas colectivas y amistades duraderas.",
+    feat_4_title: "Desafíos & Rankings", feat_4_desc: "Ranking mensual de distancia, ritmo y evolución. Premios para los más constantes del grupo.",
+    join_tag: "Cómo Participar", join_h2_1: "3 pasos para", join_h2_2: "empezar a correr", join_h2_3: "con nosotros",
+    step_1_title: "Haz clic en el botón", step_1_desc: "Accede al enlace directo al grupo oficial de BRX Running en WhatsApp. Entrada inmediata, sin necesidad de aprobación.",
+    step_2_title: "Preséntate en el grupo", step_2_desc: "Dinos tu ciudad, distancias favoritas y objetivos. La comunidad te recibirá e indicará los entrenos de tu nivel.",
+    step_3_title: "Conecta rutas y corredores", step_3_desc: "Usa el grupo para marcar tiradas largas, compartir PRs, preguntar sobre carreras y encontrar compañeros de entreno en tu ciudad.",
+    join_box_1: "¿Listo para", join_box_2: "dar el primer paso?",
+    join_box_desc: "El grupo es gratuito, abierto a todos los niveles y movido por quienes se toman en serio el rendimiento. Un clic te separa de la comunidad.",
+    join_btn: "Unirse al Grupo Ahora", join_note: "Gratis · Comunidad activa · Sal cuando quieras",
+    soc_tag: "Próximo Nivel", soc_h3_1: "¿Ya corres con nosotros?", soc_h3_2: "Conoce BRX Society.",
+    soc_desc: "BRX Society es el ecosistema cerrado de empresarios que corren. Estrategia de negocios de 8 dígitos y alto rendimiento físico — juntos.",
+    soc_btn: "Ver BRX Society"
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem('brx_lang', lang);
+  
+  // Update buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+  
+  // Update texts
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      if (el.tagName === 'TITLE') {
+        document.title = translations[lang][key];
+      } else {
+        el.innerHTML = translations[lang][key];
+      }
+    }
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('brx_lang') || 'pt';
+  setLang(savedLang);
+});
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',window.scrollY>50);
+});
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu-wrapper');
+
+hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+</script>
+</body>
+</html>
