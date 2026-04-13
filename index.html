@@ -233,300 +233,170 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 <body>
 
 <style>
+  /* Container e Nav */
   #nav {
     position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 1200px;
-    z-index: 9999;
+    top: 24px; left: 50%; transform: translateX(-50%);
+    width: 95%; max-width: 1200px;
+    z-index: 10000;
     background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 12px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 20px; padding: 12px 30px;
+    display: flex; justify-content: space-between; align-items: center;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Efeito quando a página rola */
   #nav.stuck {
-    top: 0;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-    background: rgba(5, 5, 5, 0.9);
+    top: 0; width: 100%; max-width: 100%; border-radius: 0;
+    background: rgba(5, 5, 5, 0.95);
     border-bottom: 1px solid rgba(255, 77, 77, 0.2);
     padding: 15px 40px;
   }
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-
+  /* Links Desktop */
+  .nav-links { display: flex; align-items: center; gap: 32px; }
   .nav-links a {
-    color: #888;
-    text-decoration: none;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.3s;
-    position: relative;
+    color: #888; text-decoration: none; font-size: 0.65rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; position: relative;
   }
-
-  .nav-links a:hover {
-    color: #fff;
-  }
-
-  /* Indicador de Hover */
+  .nav-links a:hover { color: #fff; }
   .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #ff4d4d;
-    transition: 0.3s;
+    content: ''; position: absolute; bottom: -6px; left: 0; width: 0;
+    height: 1px; background: #ff4d4d; transition: 0.3s;
   }
+  .nav-links a:hover::after { width: 100%; }
 
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  /* CTA Style */
-  .nav-cta {
-    background: #fff;
-    color: #000 !important;
-    padding: 10px 24px;
-    border-radius: 10px;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 0.6rem !important;
-    font-weight: 900 !important;
-    letter-spacing: 1px !important;
-  }
-
-  .nav-cta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  }
-
-  /* Seletor de Idioma Industrial */
+  /* Seletor de Idioma */
   .lang-group {
-    display: flex;
-    gap: 5px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 4px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex; gap: 5px; background: rgba(255, 255, 255, 0.03);
+    padding: 4px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);
   }
-
   .lang-btn {
-    background: transparent;
-    border: none;
-    color: #444;
-    font-size: 0.55rem;
-    font-weight: 900;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+    background: transparent; border: none; color: #444; font-size: 0.55rem;
+    font-weight: 900; padding: 6px 10px; border-radius: 5px; cursor: pointer; transition: 0.3s;
+  }
+  .lang-btn.active { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+  /* CTA */
+  .nav-cta {
+    background: #fff; color: #000 !important; padding: 10px 24px; border-radius: 10px;
+    font-family: 'Unbounded', sans-serif; font-size: 0.6rem !important; font-weight: 900 !important;
   }
 
-  .lang-btn.active {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-  }
-
-  /* Hamburger para Mobile */
+  /* Hamburger */
   .hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-  }
-
-  .hamburger span {
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: #fff;
-    margin: 5px 0;
-    transition: 0.3s;
-  }
-
-  @media (max-width: 991px) {
-    .nav-links { display: none; }
-    .hamburger { display: block; }
-    #nav { width: 90%; top: 15px; }
-  }
-</style>
-
-<style>
-<style>
-  #nav {
-    position: fixed;
-    top: 24px; left: 50%; transform: translateX(-50%);
-    width: 92%; max-width: 1200px;
-    z-index: 100000;
-    background: rgba(10, 10, 10, 0.6);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px; padding: 12px 25px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  /* Overlay */
-  #menu-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    opacity: 0; visibility: hidden;
-    z-index: 100001; transition: 0.4s;
-  }
-  #menu-overlay.active { opacity: 1; visibility: visible; }
-
-  /* Drawer Mobile */
-  #nav-drawer {
-    position: fixed;
-    top: 0; right: -100%;
-    width: 100%; max-width: 300px; height: 100vh;
-    background: #0a0a0a;
-    z-index: 100002;
-    padding: 100px 40px;
-    display: flex; flex-direction: column; gap: 25px;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    border-left: 1px solid rgba(255,255,255,0.1);
-  }
-  #nav-drawer.active { right: 0; }
-
-  /* Botão Hamburguer */
-  .hamburger {
-    display: none; background: none; border: none; cursor: pointer;
-    padding: 10px; z-index: 100003;
+    display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 10002;
   }
   .hamburger span {
-    display: block; width: 24px; height: 2px; background: #fff;
-    margin: 5px 0; transition: 0.4s;
+    display: block; width: 22px; height: 1px; background: #fff; margin: 6px 0; transition: 0.3s;
   }
   .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.is-active span:nth-child(2) { transform: translateY(-7px) rotate(-45deg); }
 
-  .drawer-link {
-    color: #fff; text-decoration: none; font-size: 1.1rem;
-    font-weight: 800; text-transform: uppercase; font-family: 'Unbounded';
+  /* Drawer Mobile (Menu que abre) */
+  #nav-drawer {
+    position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+    background: #0a0a0a; z-index: 10001; padding: 100px 40px;
+    display: flex; flex-direction: column; gap: 30px;
+    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden; border-left: 1px solid rgba(255,255,255,0.05);
   }
+  #nav-drawer.active { right: 0; visibility: visible; }
 
-  /* Estilos do Seletor de Língua */
-  .lang-group { display: flex; gap: 5px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 10px; }
-  .lang-btn {
-    background: transparent; border: none; color: #555;
-    font-size: .6rem; font-weight: 900; padding: 6px 10px;
-    cursor: pointer; transition: 0.3s; border-radius: 6px;
+  #menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 10000;
+    opacity: 0; visibility: hidden; transition: 0.3s; pointer-events: none;
   }
-  .lang-btn.active { color: #fff; background: rgba(255,255,255,0.1); }
+  #menu-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
 
   @media (max-width: 991px) {
-    .nav-desktop { display: none; }
+    .nav-links { display: none; }
     .hamburger { display: block; }
   }
 </style>
 
 <nav id="nav">
-  <a href="#" style="text-decoration:none;">
-    <svg width="140" height="30" viewBox="0 0 290 58">
-      <text x="0" y="42" font-family="'Unbounded'" font-weight="900" font-size="34" fill="#ff4d4d">BRX</text>
-      <text x="88" y="42" font-family="'Inter'" font-weight="300" font-size="28" fill="#ffffff">RUNNING</text>
+  <a href="#" style="text-decoration:none; display: flex; align-items: center;">
+    <svg width="150" height="30" viewBox="0 0 290 58">
+      <defs>
+        <linearGradient id="gN" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ff6a00"/><stop offset="100%" style="stop-color:#ff0000"/>
+        </linearGradient>
+      </defs>
+      <text x="0" y="42" font-family="'Unbounded',sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gN)" letter-spacing="-1">BRX</text>
+      <text x="88" y="42" font-family="'Inter',sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="2">RUNNING</text>
     </svg>
   </a>
 
-  <div class="nav-desktop">
-    <div style="display: flex; gap: 20px; align-items: center;">
-      <a href="#comunidade" data-i18n="nav_comm" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Comunidade</a>
-      <a href="#running" data-i18n="nav_run" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Running</a>
-      
-      <div class="lang-group">
-        <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
-        <button class="lang-btn" onclick="setLang('en', this)">EN</button>
-        <button class="lang-btn" onclick="setLang('es', this)">ES</button>
-      </div>
+  <div class="nav-links">
+    <a href="#comunidade" data-i18n="nav_comm">Comunidade</a>
+    <a href="#running" data-i18n="nav_run">Running</a>
+    <a href="#gym" data-i18n="nav_gym">Gym</a>
+    <a href="#paises" data-i18n="nav_ctry">Países</a>
+    
+    <div class="lang-group">
+      <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+      <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es', this)">ES</button>
     </div>
+
+    <a class="nav-cta" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" target="_blank">Entrar</a>
   </div>
 
-  <button class="hamburger" id="btn-menu">
+  <button class="hamburger" id="hamburger">
     <span></span><span></span>
   </button>
 </nav>
 
 <div id="menu-overlay"></div>
-
 <div id="nav-drawer">
-  <div class="lang-group" style="width: fit-content; margin-bottom: 20px;">
+    <div class="lang-group" style="width: fit-content; margin-bottom: 20px;">
       <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
       <button class="lang-btn" onclick="setLang('en', this)">EN</button>
       <button class="lang-btn" onclick="setLang('es', this)">ES</button>
-  </div>
-  
-  <a href="#comunidade" class="drawer-link" data-i18n="nav_comm" onclick="closeMenu()">Comunidade</a>
-  <a href="#running" class="drawer-link" data-i18n="nav_run" onclick="closeMenu()">Running</a>
-  <a href="#gym" class="drawer-link" data-i18n="nav_gym" onclick="closeMenu()">Gym</a>
-  <a href="#paises" class="drawer-link" data-i18n="nav_ctry" onclick="closeMenu()">Países</a>
+    </div>
+    <a href="#comunidade" style="color:#fff; text-decoration:none; font-weight:800; text-transform:uppercase; font-size:1.1rem;" onclick="toggleMenu()">Comunidade</a>
+    <a href="#running" style="color:#fff; text-decoration:none; font-weight:800; text-transform:uppercase; font-size:1.1rem;" onclick="toggleMenu()">Running</a>
+    <a href="#gym" style="color:#fff; text-decoration:none; font-weight:800; text-transform:uppercase; font-size:1.1rem;" onclick="toggleMenu()">Gym</a>
+    <a href="#paises" style="color:#fff; text-decoration:none; font-weight:800; text-transform:uppercase; font-size:1.1rem;" onclick="toggleMenu()">Países</a>
+    <a class="nav-cta" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" style="text-align:center; margin-top:20px;">Entrar no Grupo</a>
 </div>
 
 <script>
-  const btnMenu = document.getElementById('btn-menu');
+  const hamburger = document.getElementById('hamburger');
   const drawer = document.getElementById('nav-drawer');
   const overlay = document.getElementById('menu-overlay');
 
   function toggleMenu() {
-    if (drawer.classList.contains('active')) {
-      closeMenu();
-    } else {
-      btnMenu.classList.add('is-active');
-      drawer.classList.add('active');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeMenu() {
-    btnMenu.classList.remove('is-active');
-    drawer.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  // Função de Linguagem Unificada
-  function setLang(lang, btn) {
-    // 1. Atualiza visual dos botões em ambos os menus
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.remove('active');
-      if(b.textContent.toLowerCase() === lang) b.classList.add('active');
-    });
-
-    // 2. Chama a função global de troca de idioma (se houver)
-    if(typeof updateContent === 'function') {
-      updateContent(lang);
-    }
+    hamburger.classList.toggle('is-active');
+    drawer.classList.toggle('active');
+    overlay.classList.toggle('active');
     
-    // Opcional: fechar menu mobile ao trocar língua
-    if(window.innerWidth <= 991) closeMenu();
+    if(drawer.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
   }
 
-  btnMenu.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', closeMenu);
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 991) closeMenu();
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 50) nav.classList.add('stuck');
+    else nav.classList.remove('stuck');
   });
+
+  function setLang(lang, btn) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => {
+       if(b.textContent.toLowerCase() === lang) b.classList.add('active');
+    });
+    // Se você tiver uma função updateContent(lang), chame-a aqui
+  }
 </script>
 
 <!-- HERO -->
@@ -535,7 +405,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
   <div class="hero-overlay"></div>
   <div class="hero-overlay2"></div>
   <div class="hero-body">
-    <div class="hero-badge"><span class="badge-dot"></span><span data-i18n="hero_badge">Comunidade Global · WhatsApp · Gratuito</span></div>
+    <div class="hero-badge"><span class="badge-dot"></span><span data-i18n="hero_badge">Comunidade Global</span></div>
     <h1>
       <span class="grad" data-i18n="hero_h1a">Não é só</span><br>
       <span class="grad" data-i18n="hero_h1b">corrida.</span><br>
@@ -1348,7 +1218,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 const T = {
   pt:{
     nav_comm:"Comunidade",nav_run:"Running",nav_gym:"Gym",nav_ctry:"Países",nav_cta:"Entrar",
-    hero_badge:"Comunidade Global · WhatsApp · Gratuito",hero_h1a:"Não é só",hero_h1b:"corrida.",hero_h1c:"É um estilo de vida.",
+    hero_badge:"Comunidade Global",hero_h1a:"Não é só",hero_h1b:"corrida.",hero_h1c:"É um estilo de vida.",
     hero_sub:"Comunidade focada em evolução física, mental e social. Treino, saúde, conexão e pessoas reais construindo uma vida melhor — juntas.",
     hero_btn:"Fazer Parte Agora",hero_btn2:"Conheça o Movimento",
     stat_members:"Membros",stat_countries:"Países",stat_weekly:"Treinos/Semana",stat_pillars:"Pilares de Vida",stat_free:"Gratuito",
@@ -1391,7 +1261,7 @@ const T = {
   },
   en:{
     nav_comm:"Community",nav_run:"Running",nav_gym:"Gym",nav_ctry:"Countries",nav_cta:"Join",
-    hero_badge:"Global Community · WhatsApp · Free",hero_h1a:"It's not just",hero_h1b:"running.",hero_h1c:"It's a lifestyle.",
+    hero_badge:"Global Community ",hero_h1a:"It's not just",hero_h1b:"running.",hero_h1c:"It's a lifestyle.",
     hero_sub:"A community focused on physical, mental and social evolution. Training, health, connection and real people building better lives together.",
     hero_btn:"Join Now",hero_btn2:"Discover the Movement",
     stat_members:"Members",stat_countries:"Countries",stat_weekly:"Workouts/Week",stat_pillars:"Life Pillars",stat_free:"Free",
@@ -1434,7 +1304,7 @@ const T = {
   },
   es:{
     nav_comm:"Comunidad",nav_run:"Running",nav_gym:"Gym",nav_ctry:"Países",nav_cta:"Unirse",
-    hero_badge:"Comunidad Global · WhatsApp · Gratis",hero_h1a:"No es solo",hero_h1b:"correr.",hero_h1c:"Es un estilo de vida.",
+    hero_badge:"Comunidad Global ",hero_h1a:"No es solo",hero_h1b:"correr.",hero_h1c:"Es un estilo de vida.",
     hero_sub:"Comunidad enfocada en evolución física, mental y social. Entrenamiento, salud, conexión y personas reales construyendo vidas mejores juntas.",
     hero_btn:"Unirse Ahora",hero_btn2:"Conoce el Movimiento",
     stat_members:"Miembros",stat_countries:"Países",stat_weekly:"Entrenos/Semana",stat_pillars:"Pilares de Vida",stat_free:"Gratis",
