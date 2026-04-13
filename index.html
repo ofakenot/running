@@ -371,6 +371,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 </style>
 
 <style>
+<style>
   #nav {
     position: fixed;
     top: 24px; left: 50%; transform: translateX(-50%);
@@ -383,14 +384,13 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     display: flex; justify-content: space-between; align-items: center;
   }
 
-  /* Overlay para fechar ao clicar fora */
+  /* Overlay */
   #menu-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.7);
     opacity: 0; visibility: hidden;
-    z-index: 100001;
-    transition: 0.4s;
+    z-index: 100001; transition: 0.4s;
   }
   #menu-overlay.active { opacity: 1; visibility: visible; }
 
@@ -408,17 +408,15 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
   }
   #nav-drawer.active { right: 0; }
 
-  /* Botão Hamburguer / X */
+  /* Botão Hamburguer */
   .hamburger {
     display: none; background: none; border: none; cursor: pointer;
-    padding: 10px; z-index: 100003; /* Acima do Drawer */
+    padding: 10px; z-index: 100003;
   }
   .hamburger span {
     display: block; width: 24px; height: 2px; background: #fff;
     margin: 5px 0; transition: 0.4s;
   }
-
-  /* Transformação em X */
   .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.is-active span:nth-child(2) { transform: translateY(-7px) rotate(-45deg); }
 
@@ -426,6 +424,15 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     color: #fff; text-decoration: none; font-size: 1.1rem;
     font-weight: 800; text-transform: uppercase; font-family: 'Unbounded';
   }
+
+  /* Estilos do Seletor de Língua */
+  .lang-group { display: flex; gap: 5px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 10px; }
+  .lang-btn {
+    background: transparent; border: none; color: #555;
+    font-size: .6rem; font-weight: 900; padding: 6px 10px;
+    cursor: pointer; transition: 0.3s; border-radius: 6px;
+  }
+  .lang-btn.active { color: #fff; background: rgba(255,255,255,0.1); }
 
   @media (max-width: 991px) {
     .nav-desktop { display: none; }
@@ -443,11 +450,13 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 
   <div class="nav-desktop">
     <div style="display: flex; gap: 20px; align-items: center;">
-      <a href="#comunidade" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Comunidade</a>
-      <a href="#running" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Running</a>
-      <div class="lang-group" style="display:flex; gap:5px; background:rgba(255,255,255,0.05); padding:4px; border-radius:10px;">
-        <button class="lang-btn active" onclick="setLang('pt', this)" style="background:transparent; border:none; color:#fff; font-size:.6rem; font-weight:900; padding:6px 10px; cursor:pointer;">PT</button>
-        <button class="lang-btn" onclick="setLang('en', this)" style="background:transparent; border:none; color:#555; font-size:.6rem; font-weight:900; padding:6px 10px; cursor:pointer;">EN</button>
+      <a href="#comunidade" data-i18n="nav_comm" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Comunidade</a>
+      <a href="#running" data-i18n="nav_run" style="color:#888; text-decoration:none; font-size:.65rem; font-weight:800; text-transform:uppercase;">Running</a>
+      
+      <div class="lang-group">
+        <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+        <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+        <button class="lang-btn" onclick="setLang('es', this)">ES</button>
       </div>
     </div>
   </div>
@@ -460,15 +469,16 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 <div id="menu-overlay"></div>
 
 <div id="nav-drawer">
-  <a href="#comunidade" class="drawer-link" onclick="closeMenu()">Comunidade</a>
-  <a href="#running" class="drawer-link" onclick="closeMenu()">Running</a>
-  <a href="#gym" class="drawer-link" onclick="closeMenu()">Gym</a>
-  <a href="#paises" class="drawer-link" onclick="closeMenu()">Países</a>
-  <br>
-  <div class="lang-group" style="display:flex; gap:10px;">
-      <button class="lang-btn active" onclick="setLang('pt', this)" style="background:rgba(255,255,255,0.1); border:none; color:#fff; padding:10px; border-radius:8px; font-weight:900;">PT</button>
-      <button class="lang-btn" onclick="setLang('en', this)" style="background:transparent; border:1px solid #333; color:#555; padding:10px; border-radius:8px; font-weight:900;">EN</button>
+  <div class="lang-group" style="width: fit-content; margin-bottom: 20px;">
+      <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+      <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es', this)">ES</button>
   </div>
+  
+  <a href="#comunidade" class="drawer-link" data-i18n="nav_comm" onclick="closeMenu()">Comunidade</a>
+  <a href="#running" class="drawer-link" data-i18n="nav_run" onclick="closeMenu()">Running</a>
+  <a href="#gym" class="drawer-link" data-i18n="nav_gym" onclick="closeMenu()">Gym</a>
+  <a href="#paises" class="drawer-link" data-i18n="nav_ctry" onclick="closeMenu()">Países</a>
 </div>
 
 <script>
@@ -476,16 +486,14 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
   const drawer = document.getElementById('nav-drawer');
   const overlay = document.getElementById('menu-overlay');
 
-  // Alternar Menu (Abrir/Fechar no mesmo botão)
   function toggleMenu() {
-    const isOpen = drawer.classList.contains('active');
-    if (isOpen) {
+    if (drawer.classList.contains('active')) {
       closeMenu();
     } else {
       btnMenu.classList.add('is-active');
       drawer.classList.add('active');
       overlay.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Trava o scroll da página
+      document.body.style.overflow = 'hidden';
     }
   }
 
@@ -493,13 +501,29 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     btnMenu.classList.remove('is-active');
     drawer.classList.remove('active');
     overlay.classList.remove('active');
-    document.body.style.overflow = ''; // Libera o scroll
+    document.body.style.overflow = '';
+  }
+
+  // Função de Linguagem Unificada
+  function setLang(lang, btn) {
+    // 1. Atualiza visual dos botões em ambos os menus
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.remove('active');
+      if(b.textContent.toLowerCase() === lang) b.classList.add('active');
+    });
+
+    // 2. Chama a função global de troca de idioma (se houver)
+    if(typeof updateContent === 'function') {
+      updateContent(lang);
+    }
+    
+    // Opcional: fechar menu mobile ao trocar língua
+    if(window.innerWidth <= 991) closeMenu();
   }
 
   btnMenu.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', closeMenu);
 
-  // Fecha o menu se a janela for redimensionada para desktop
   window.addEventListener('resize', () => {
     if (window.innerWidth > 991) closeMenu();
   });
