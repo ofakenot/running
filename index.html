@@ -376,215 +376,175 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     top: 24px;
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
+    width: 92%;
     max-width: 1200px;
-    z-index: 9999;
-    background: rgba(10, 10, 10, 0.4);
+    z-index: 100000;
+    background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    padding: 12px 30px;
+    padding: 12px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   #nav.stuck {
-    top: 0;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0;
-    background: rgba(5, 5, 5, 0.95);
-    border-bottom: 1px solid rgba(255, 77, 77, 0.2);
+    top: 0; width: 100%; max-width: 100%; border-radius: 0;
+    background: rgba(5, 5, 5, 0.98);
   }
 
-  /* Desktop Links */
-  .nav-desktop {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-
-  .nav-desktop a:not(.nav-cta) {
-    color: #888;
-    text-decoration: none;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.3s;
-  }
-
-  .nav-desktop a:hover { color: #fff; }
-
-  .nav-cta {
-    background: #fff;
-    color: #000 !important;
-    padding: 10px 24px;
-    border-radius: 10px;
-    font-family: 'Unbounded', sans-serif;
-    font-size: 0.6rem !important;
-    font-weight: 900 !important;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  /* Seletor de Idiomas */
+  /* Seletor de Idiomas Industrial */
   .lang-group {
     display: flex;
     gap: 5px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     padding: 4px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 0 15px;
   }
 
   .lang-btn {
     background: transparent;
     border: none;
-    color: #444;
-    font-size: 0.55rem;
+    color: #555;
+    font-size: 0.6rem;
     font-weight: 900;
     padding: 6px 10px;
-    border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+    border-radius: 6px;
   }
 
-  .lang-btn.active { background: rgba(255, 255, 255, 0.1); color: #fff; }
+  .lang-btn.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-  /* Hamburger */
+  /* Desktop */
+  .nav-desktop { display: flex; align-items: center; }
+  .nav-desktop .links { display: flex; gap: 25px; margin-right: 20px; }
+  .nav-desktop a { color: #888; text-decoration: none; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+
+  /* Mobile Button */
   .hamburger {
     display: none;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 10001;
     padding: 10px;
+    z-index: 100002;
   }
 
   .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #fff;
-    margin: 4px 0;
-    transition: 0.3s;
+    display: block; width: 24px; height: 2px; background: #fff;
+    margin: 5px 0; transition: 0.4s;
   }
 
-  /* Mobile Drawer (O menu que abre) */
-  .nav-drawer {
+  /* Menu Mobile (Drawer) */
+  #nav-drawer {
     position: fixed;
-    top: 0;
-    right: -100%;
-    width: 280px;
+    top: 0; right: -100%;
+    width: 100%; max-width: 300px;
     height: 100vh;
     background: #0a0a0a;
-    z-index: 10000;
+    z-index: 100001;
     padding: 100px 40px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 1px solid rgba(255,255,255,0.1);
   }
 
-  .nav-drawer.open { right: 0; }
+  #nav-drawer.active { right: 0 !important; }
 
-  .nav-drawer a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  .drawer-link {
+    color: #fff; text-decoration: none; font-size: 1.1rem;
+    font-weight: 800; text-transform: uppercase; font-family: 'Unbounded';
   }
 
-  /* Responsividade */
+  /* X Animation */
+  .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-active span:nth-child(2) { transform: translateY(-7px) rotate(-45deg); }
+
   @media (max-width: 991px) {
     .nav-desktop { display: none; }
     .hamburger { display: block; }
-    
-    /* Quando o menu está aberto, transforma o hambúrguer em X */
-    .hamburger.active span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
   }
 </style>
 
 <nav id="nav">
-  <a href="#" style="text-decoration:none; display: flex; align-items: center;">
-    <svg width="150" height="30" viewBox="0 0 290 58" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="gN" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#ff6a00"/><stop offset="100%" style="stop-color:#ff0000"/>
-        </linearGradient>
-      </defs>
-      <text x="0" y="42" font-family="'Unbounded',sans-serif" font-weight="900" font-style="italic" font-size="34" fill="url(#gN)" letter-spacing="-1">BRX</text>
-      <text x="88" y="42" font-family="'Inter',sans-serif" font-weight="300" font-size="28" fill="#ffffff" letter-spacing="2">RUNNING</text>
+  <a href="#" style="text-decoration:none;">
+    <svg width="140" height="30" viewBox="0 0 290 58">
+      <text x="0" y="42" font-family="'Unbounded'" font-weight="900" font-size="34" fill="#ff4d4d">BRX</text>
+      <text x="88" y="42" font-family="'Inter'" font-weight="300" font-size="28" fill="#ffffff">RUNNING</text>
     </svg>
   </a>
 
   <div class="nav-desktop">
-    <a href="#comunidade" data-i18n="nav_comm">Comunidade</a>
-    <a href="#running" data-i18n="nav_run">Running</a>
-    <a href="#gym" data-i18n="nav_gym">Gym</a>
-    <a href="#paises" data-i18n="nav_ctry">Países</a>
+    <div class="links">
+      <a href="#comunidade">Comunidade</a>
+      <a href="#running">Running</a>
+      <a href="#gym">Gym</a>
+      <a href="#paises">Países</a>
+    </div>
     
     <div class="lang-group">
-      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+      <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es', this)">ES</button>
     </div>
-
-    <a class="nav-cta" href="https://chat.whatsapp.com/..." target="_blank" data-i18n="nav_cta">Entrar</a>
   </div>
 
-  <button class="hamburger" id="hamburger">
+  <button class="hamburger" id="btn-menu">
     <span></span><span></span>
   </button>
 </nav>
 
-<div class="nav-drawer" id="nav-drawer">
+<div id="nav-drawer">
   <div class="lang-group" style="width: fit-content; margin-bottom: 20px;">
-      <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn active" onclick="setLang('pt', this)">PT</button>
+      <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es', this)">ES</button>
   </div>
-  <a href="#comunidade" data-i18n="nav_comm" onclick="toggleMenu()">Comunidade</a>
-  <a href="#running" data-i18n="nav_run" onclick="toggleMenu()">Running</a>
-  <a href="#gym" data-i18n="nav_gym" onclick="toggleMenu()">Gym</a>
-  <a href="#paises" data-i18n="nav_ctry" onclick="toggleMenu()">Países</a>
-  <a class="nav-cta" href="‎https://chat.whatsapp.com/Ij2GcVwrssGFTwvanXzlwB?mode=gi_t" style="text-align: center; margin-top: 20px;">Entrar</a>
+  
+  <a href="#comunidade" class="drawer-link" onclick="closeMenu()">Comunidade</a>
+  <a href="#running" class="drawer-link" onclick="closeMenu()">Running</a>
+  <a href="#gym" class="drawer-link" onclick="closeMenu()">Gym</a>
+  <a href="#paises" class="drawer-link" onclick="closeMenu()">Países</a>
 </div>
 
 <script>
-  const hamburger = document.getElementById('hamburger');
+  const btnMenu = document.getElementById('btn-menu');
   const drawer = document.getElementById('nav-drawer');
 
-  function toggleMenu() {
-    hamburger.classList.toggle('active');
-    drawer.classList.toggle('open');
+  // Abre/Fecha Menu
+  btnMenu.addEventListener('click', () => {
+    btnMenu.classList.toggle('is-active');
+    drawer.classList.toggle('active');
+  });
+
+  function closeMenu() {
+    btnMenu.classList.remove('is-active');
+    drawer.classList.remove('active');
   }
 
-  hamburger.addEventListener('click', toggleMenu);
+  // Função de Linguagem (Estética)
+  function setLang(lang, btn) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    // Ativa nos dois lugares (desktop e mobile)
+    document.querySelectorAll(`.lang-btn[onclick*="${lang}"]`).forEach(b => b.classList.add('active'));
+    
+    // Aqui você chama sua função real de tradução se ela existir:
+    // if(window.changeLanguage) changeLanguage(lang);
+  }
 
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 50) nav.classList.add('stuck');
-    else nav.classList.remove('stuck');
-  });
-</script>
-
-<script>
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 50) {
-      nav.classList.add('stuck');
-    } else {
-      nav.classList.remove('stuck');
-    }
+    const navbar = document.getElementById('nav');
+    if (window.scrollY > 50) navbar.classList.add('stuck');
+    else navbar.classList.remove('stuck');
   });
 </script>
 
@@ -907,7 +867,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     <div class="schedule-dashboard reveal">
       <div class="day-card">
         <div class="day-info">
-          <span class="day-label" data-i18n="d_mon">unda</span>
+          <span class="day-label" data-i18n="d_mon">Segunda</span>
           <span class="day-activity" data-i18n="d_mon_d">Recuperação Ativa</span>
         </div>
         <div class="day-time-tag">06:00</div>
@@ -1049,219 +1009,144 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
 </style>
 
 <style>
-    #gym-performance {
-        background: #000;
-        color: #fff;
-        padding: 100px 0;
-        font-family: 'Inter', sans-serif;
+  #gym-performance {
+    background: #000;
+    color: #fff;
+    padding: 100px 0;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  .gym-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .gym-header {
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  .gym-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    background: linear-gradient(90deg, #ff6a00, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .gym-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+  }
+
+  /* ── GRID HÍBRIDO ── */
+  .gym-tracker {
+    display: grid;
+    /* No Desktop: 3 colunas perfeitas */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 24px;
+  }
+
+  .gym-card {
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 32px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .gym-card:hover {
+    border-color: #ff4d4d;
+    transform: translateY(-10px);
+    background: #0f0f0f;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  }
+
+  .day-tag {
+    font-family: 'Unbounded';
+    font-size: 0.55rem;
+    color: #ff4d4d;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .day-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+  }
+
+  .ex-item {
+    margin-bottom: 20px;
+  }
+
+  .ex-meta {
+    font-size: 0.55rem;
+    color: #444;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 1px;
+    display: block;
+  }
+
+  .ex-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #eee;
+    margin: 4px 0;
+  }
+
+  .ex-reps {
+    font-family: 'Unbounded';
+    font-size: 0.65rem;
+    color: #888;
+  }
+
+  /* ── ADAPTAÇÃO PARA MOBILE (VOLTA O SLIDE) ── */
+  @media (max-width: 1100px) {
+    .gym-tracker {
+      display: flex; /* Muda de Grid para Flex para deslizar */
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 40px;
+      margin: 0 -24px; /* Estende até a borda da tela */
+      padding-left: 24px;
+      padding-right: 24px;
+      scrollbar-width: none;
+    }
+    .gym-tracker::-webkit-scrollbar { display: none; }
+
+    .gym-card {
+      flex: 0 0 85vw; /* Card grande no mobile */
+      scroll-snap-align: center;
+      padding: 30px;
     }
 
-    .gym-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: grid;
-        grid-template-columns: 1fr 1.5fr;
-        gap: 60px;
-        align-items: center;
-    }
+    .gym-header { text-align: left; }
+  }
 
-    .gym-title {
-        font-family: 'Unbounded', sans-serif;
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        line-height: 0.85;
-        letter-spacing: -3px;
-        text-transform: uppercase;
-        margin: 30px 0;
-    }
-
-    /* Dashboard UI */
-    .gym-dashboard {
-        background: #0a0a0a;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 40px;
-        padding: 50px;
-        position: relative;
-        box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-    }
-
-    /* Custom Scrollbar para os dias no mobile */
-    .gym-nav {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 40px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        padding-bottom: 20px;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-    .gym-nav::-webkit-scrollbar { display: none; }
-
-    .gym-nav-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #444;
-        padding: 12px 20px;
-        border-radius: 12px;
-        font-family: 'Unbounded';
-        font-size: 0.65rem;
-        font-weight: 700;
-        cursor: pointer;
-        text-transform: uppercase;
-        white-space: nowrap;
-        transition: 0.3s;
-    }
-
-    .gym-nav-btn.active {
-        background: #ff0000;
-        color: #fff;
-        border-color: #ff0000;
-        box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
-    }
-
-    /* List Item Style */
-    .ex-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 24px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        align-items: center;
-        transition: 0.3s;
-    }
-
-    .ex-row:hover {
-        background: rgba(255, 255, 255, 0.01);
-        padding-left: 10px;
-    }
-
-    .ex-label {
-        font-size: 0.55rem;
-        color: #ff0000;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        display: block;
-        margin-bottom: 6px;
-    }
-
-    .ex-name { font-size: 1.15rem; font-weight: 700; color: #fff; }
-
-    .ex-data {
-        font-family: 'Unbounded';
-        font-size: 0.75rem;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 10px 18px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        white-space: nowrap;
-        color: #888;
-    }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; animation: tabReveal 0.4s ease forwards; }
-
-    @keyframes tabReveal {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── MOBILE ADAPTATION ── */
-    @media (max-width: 991px) {
-        #gym-performance { padding: 80px 0; }
-        .gym-container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-        .gym-dashboard { padding: 30px 20px; border-radius: 30px; }
-        .ex-row { flex-direction: column; gap: 15px; padding: 25px 0; }
-        .ex-data { width: 100%; border-color: rgba(255,255,255,0.1); }
-        .gym-nav { justify-content: flex-start; padding-left: 5px; }
-    }
+  @media (max-width: 600px) {
+    .gym-title { font-size: 2.5rem; }
+  }
 </style>
 
-<section id="gym-performance">
-    <div class="gym-container">
-        <div class="reveal">
-            <span class="gym-eyebrow" data-i18n="gym_tag" style="font-size: 0.7rem; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; background: linear-gradient(90deg, #ff6a00, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Protocolo Musculação</span>
-            <h2 class="gym-title">Build<br><span style="color: rgba(255,255,255,0.05);">Engine</span></h2>
-            <p style="color: #666; font-size: 1.1rem; line-height: 1.7; max-width: 440px; margin: 0 auto 0 0;" data-i18n="gym_desc">Planilha técnica de 6 dias otimizada para atletas de endurance. Foco absoluto em força reativa e blindagem contra lesões.</p>
-        </div>
 
-        <div class="gym-dashboard reveal">
-            <div class="gym-nav">
-                <button class="gym-nav-btn active" onclick="tabGym('seg', this)" data-i18n="tab_mon">Seg</button>
-                <button class="gym-nav-btn" onclick="tabGym('ter', this)" data-i18n="tab_tue">Ter</button>
-                <button class="gym-nav-btn" onclick="tabGym('qua', this)" data-i18n="tab_wed">Qua</button>
-                <button class="gym-nav-btn" onclick="tabGym('qui', this)" data-i18n="tab_thu">Qui</button>
-                <button class="gym-nav-btn" onclick="tabGym('sex', this)" data-i18n="tab_fri">Sex</button>
-                <button class="gym-nav-btn" onclick="tabGym('sab', this)" data-i18n="tab_sat">Sáb</button>
-            </div>
-
-            <div id="gym-seg" class="tab-content active">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main Lift</span><div class="ex-name">Supino Reto</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Reto</div></div><div class="ex-data">3 × 12 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Isolation</span><div class="ex-name">Tríceps Pulley</div></div><div class="ex-data">4 × 12 REPS</div></div>
-            </div>
-
-            <div id="gym-ter" class="tab-content">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main Pull</span><div class="ex-name">Puxada Alta</div></div><div class="ex-data">4 × 10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Remada Baixa</div></div><div class="ex-data">3 × 12 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Biceps</span><div class="ex-name">Rosca Direta</div></div><div class="ex-data">4 × 10 REPS</div></div>
-            </div>
-
-            <div id="gym-qua" class="tab-content">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Lower Body</span><div class="ex-name">Agachamento Livre</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Endurance</span><div class="ex-name">Leg Press 45º</div></div><div class="ex-data">4 × 12 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core Stability</span><div class="ex-name">Prancha Abdominal</div></div><div class="ex-data">3 × 1 MIN</div></div>
-            </div>
-
-            <div id="gym-qui" class="tab-content">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Shoulders</span><div class="ex-name">Desenvolvimento Barra</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Elevação Lateral</div></div><div class="ex-data">4 × 12 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Traps</span><div class="ex-name">Remada Alta</div></div><div class="ex-data">4 × 10 REPS</div></div>
-            </div>
-
-            <div id="gym-sex" class="tab-content">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Hybrid</span><div class="ex-name">Supino + Puxada</div></div><div class="ex-data">4 × 10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Inclinado</div></div><div class="ex-data">3 × 12 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core</span><div class="ex-name">Abdominal Infra</div></div><div class="ex-data">4 × 20 REPS</div></div>
-            </div>
-
-            <div id="gym-sab" class="tab-content">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Chain</span><div class="ex-name">Stiff com Barra</div></div><div class="ex-data">4 × 10 REPS</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Stability</span><div class="ex-name">Passada Lateral</div></div><div class="ex-data">4 × 12 / SIDE</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Glutes</span><div class="ex-name">Elevação Pélvica</div></div><div class="ex-data">4 × 12 REPS</div></div>
-            </div>
-
-            <div style="margin-top: 40px; padding: 25px; background: rgba(255,255,255,0.02); border-left: 3px solid #ff0000; border-radius: 0 15px 15px 0; text-align: left;">
-                <p style="font-size: 0.8rem; color: #888; margin: 0; line-height: 1.5;" data-i18n="gym_tip">
-                    <strong style="color: #fff; text-transform: uppercase; letter-spacing: 1px;">Status: Recuperação Obrigatória</strong><br>
-                    Sono de 7-9h é o pilar da performance industrial. O treino rompe, o descanso reconstrói.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script>
-    function tabGym(day, btn) {
-        // Seleciona todos os conteúdos e botões do dashboard específico
-        const container = btn.closest('.gym-dashboard');
-        container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        container.querySelectorAll('.gym-nav-btn').forEach(b => b.classList.remove('active'));
-        
-        // Ativa o alvo
-        const target = document.getElementById('gym-' + day);
-        if(target) target.classList.add('active');
-        btn.classList.add('active');
-    }
-</script>
-
-<script>
-    function tabGym(day, btn) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.gym-nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('gym-' + day).classList.add('active');
-        btn.classList.add('active');
-    }
-</script>
 
 <section id="lifestyle" style="background: #050505; padding: 140px 0; border-top: 1px solid rgba(255,255,255,0.03); overflow: hidden;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
@@ -1424,7 +1309,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
         </div>
 
         <div style="text-align: center;" class="reveal">
-            <a class="btn-industrial" href="‎https://chat.whatsapp.com/Ij2GcVwrssGFTwvanXzlwB?mode=gi_t" target="_blank" rel="noopener">
+            <a class="btn-industrial" href="https://chat.whatsapp.com/FPtzh45Yvp6AzKhHDskIoK?mode=gi_t" target="_blank" rel="noopener">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 12px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 <span data-i18n="join_btn">Iniciar Protocolo BRX</span>
             </a>
@@ -1499,7 +1384,7 @@ const T = {
     d_mon:"Segunda",d_mon_d:"Recuperação Ativa ou Descanso",d_tue:"Terça",d_tue_d:"Treino de Tiros (Intervalado)",
     d_wed:"Quarta",d_wed_d:"Rodagem Leve (Z2)",d_thu:"Quinta",d_thu_d:"Tempo Run (Ritmo de Prova)",d_sat:"Sábado",d_sat_d:"Longão da Comunidade",
     gym_tag:"Musculação",gym_h1:"Treinos",gym_h2:"Igor Kimura",gym_role:"Personal Trainer · BRX Running",
-    gym_desc:"Planilha de 6 dias estruturada para complementar a corrida, construindo força, prevenindo lesões e acelerando a recuperação muscular.",
+    gym_desc:"Planilha de 6 dias estruturada para complementar a corrida — construindo força, prevenindo lesões e acelerando a recuperação muscular.",
     tab_mon:"Seg",tab_tue:"Ter",tab_wed:"Qua",tab_thu:"Qui",tab_fri:"Sex",tab_sat:"Sáb",
     wday_mon:"Segunda-feira",wg_mon:"Peito e Tríceps",wday_tue:"Terça-feira",wg_tue:"Costas e Bíceps",
     wday_wed:"Quarta-feira",wg_wed:"Pernas e Abdômen",wday_thu:"Quinta-feira",wg_thu:"Ombros e Trapézio",
