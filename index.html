@@ -907,7 +907,7 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     <div class="schedule-dashboard reveal">
       <div class="day-card">
         <div class="day-info">
-          <span class="day-label" data-i18n="d_mon">Segunda</span>
+          <span class="day-label" data-i18n="d_mon">unda</span>
           <span class="day-activity" data-i18n="d_mon_d">Recuperação Ativa</span>
         </div>
         <div class="day-time-tag">06:00</div>
@@ -1048,12 +1048,140 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
     }
 </style>
 
+<style>
+    #gym-performance {
+        background: #000;
+        color: #fff;
+        padding: 100px 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .gym-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .gym-title {
+        font-family: 'Unbounded', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 0.85;
+        letter-spacing: -3px;
+        text-transform: uppercase;
+        margin: 30px 0;
+    }
+
+    /* Dashboard UI */
+    .gym-dashboard {
+        background: #0a0a0a;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 40px;
+        padding: 50px;
+        position: relative;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    }
+
+    /* Custom Scrollbar para os dias no mobile */
+    .gym-nav {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 20px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .gym-nav::-webkit-scrollbar { display: none; }
+
+    .gym-nav-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #444;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-family: 'Unbounded';
+        font-size: 0.65rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: 0.3s;
+    }
+
+    .gym-nav-btn.active {
+        background: #ff0000;
+        color: #fff;
+        border-color: #ff0000;
+        box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+    }
+
+    /* List Item Style */
+    .ex-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        align-items: center;
+        transition: 0.3s;
+    }
+
+    .ex-row:hover {
+        background: rgba(255, 255, 255, 0.01);
+        padding-left: 10px;
+    }
+
+    .ex-label {
+        font-size: 0.55rem;
+        color: #ff0000;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .ex-name { font-size: 1.15rem; font-weight: 700; color: #fff; }
+
+    .ex-data {
+        font-family: 'Unbounded';
+        font-size: 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        white-space: nowrap;
+        color: #888;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: tabReveal 0.4s ease forwards; }
+
+    @keyframes tabReveal {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ADAPTATION ── */
+    @media (max-width: 991px) {
+        #gym-performance { padding: 80px 0; }
+        .gym-container { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+        .gym-dashboard { padding: 30px 20px; border-radius: 30px; }
+        .ex-row { flex-direction: column; gap: 15px; padding: 25px 0; }
+        .ex-data { width: 100%; border-color: rgba(255,255,255,0.1); }
+        .gym-nav { justify-content: flex-start; padding-left: 5px; }
+    }
+</style>
+
 <section id="gym-performance">
     <div class="gym-container">
         <div class="reveal">
-            <span class="gym-eyebrow" data-i18n="gym_tag">Protocolo Musculação</span>
-            <h2 class="gym-title">Build<br><span style="color: rgba(255,255,255,0.1);">Engine</span></h2>
-            <p style="color: #666; font-size: 1.1rem; line-height: 1.6; margin-top: 30px;" data-i18n="gym_desc">Planilha de 6 dias otimizada para atletas de endurance. Foco em força reativa e prevenção de lesões.</p>
+            <span class="gym-eyebrow" data-i18n="gym_tag" style="font-size: 0.7rem; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; background: linear-gradient(90deg, #ff6a00, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Protocolo Musculação</span>
+            <h2 class="gym-title">Build<br><span style="color: rgba(255,255,255,0.05);">Engine</span></h2>
+            <p style="color: #666; font-size: 1.1rem; line-height: 1.7; max-width: 440px; margin: 0 auto 0 0;" data-i18n="gym_desc">Planilha técnica de 6 dias otimizada para atletas de endurance. Foco absoluto em força reativa e blindagem contra lesões.</p>
         </div>
 
         <div class="gym-dashboard reveal">
@@ -1067,52 +1195,64 @@ footer { border-top:1px solid var(--border); padding:34px 40px; }
             </div>
 
             <div id="gym-seg" class="tab-content active">
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main</span><div class="ex-name">Supino Reto</div></div><div class="ex-data">4 × 8-10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Reto</div></div><div class="ex-data">3 × 12</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Isolation</span><div class="ex-name">Tríceps Pulley</div></div><div class="ex-data">4 × 12</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main Lift</span><div class="ex-name">Supino Reto</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Reto</div></div><div class="ex-data">3 × 12 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Isolation</span><div class="ex-name">Tríceps Pulley</div></div><div class="ex-data">4 × 12 REPS</div></div>
             </div>
 
             <div id="gym-ter" class="tab-content">
-                <div style="margin-bottom: 25px;"><span style="font-family:'Unbounded'; font-size:0.6rem; color:#444; letter-spacing:3px;"></span></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main</span><div class="ex-name">Puxada Alta</div></div><div class="ex-data">4 × 10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Remada Baixa</div></div><div class="ex-data">3 × 12</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Isolation</span><div class="ex-name">Rosca Direta</div></div><div class="ex-data">4 × 10</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main Pull</span><div class="ex-name">Puxada Alta</div></div><div class="ex-data">4 × 10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Remada Baixa</div></div><div class="ex-data">3 × 12 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Biceps</span><div class="ex-name">Rosca Direta</div></div><div class="ex-data">4 × 10 REPS</div></div>
             </div>
 
             <div id="gym-qua" class="tab-content">
-                <div style="margin-bottom: 25px;"><span style="font-family:'Unbounded'; font-size:0.6rem; color:#444; letter-spacing:3px;"></span></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main</span><div class="ex-name">Agachamento Livre</div></div><div class="ex-data">4 × 8-10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Endurance</span><div class="ex-name">Leg Press 45º</div></div><div class="ex-data">4 × 12</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Stability</span><div class="ex-name">Prancha Abdominal</div></div><div class="ex-data">3 × 1 min</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Lower Body</span><div class="ex-name">Agachamento Livre</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Endurance</span><div class="ex-name">Leg Press 45º</div></div><div class="ex-data">4 × 12 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core Stability</span><div class="ex-name">Prancha Abdominal</div></div><div class="ex-data">3 × 1 MIN</div></div>
             </div>
 
             <div id="gym-qui" class="tab-content">
-                <div style="margin-bottom: 25px;"><span style="font-family:'Unbounded'; font-size:0.6rem; color:#444; letter-spacing:3px;"></span></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Main</span><div class="ex-name">Desenvolvimento Barra</div></div><div class="ex-data">4 × 8-10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Elevação Lateral</div></div><div class="ex-data">4 × 12</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core</span><div class="ex-name">Remada Alta</div></div><div class="ex-data">4 × 10</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Shoulders</span><div class="ex-name">Desenvolvimento Barra</div></div><div class="ex-data">4 × 8-10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Elevação Lateral</div></div><div class="ex-data">4 × 12 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Traps</span><div class="ex-name">Remada Alta</div></div><div class="ex-data">4 × 10 REPS</div></div>
             </div>
 
             <div id="gym-sex" class="tab-content">
-                <div style="margin-bottom: 25px;"><span style="font-family:'Unbounded'; font-size:0.6rem; color:#444; letter-spacing:3px;"></span></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Compound</span><div class="ex-name">Supino + Puxada</div></div><div class="ex-data">4 × 10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Inclinado</div></div><div class="ex-data">3 × 12</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core</span><div class="ex-name">Abdominal Infra</div></div><div class="ex-data">4 × 20</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Hybrid</span><div class="ex-name">Supino + Puxada</div></div><div class="ex-data">4 × 10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Accessory</span><div class="ex-name">Crucifixo Inclinado</div></div><div class="ex-data">3 × 12 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Core</span><div class="ex-name">Abdominal Infra</div></div><div class="ex-data">4 × 20 REPS</div></div>
             </div>
 
             <div id="gym-sab" class="tab-content">
-                <div style="margin-bottom: 25px;"><span style="font-family:'Unbounded'; font-size:0.6rem; color:#444; letter-spacing:3px;"></span></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Compound</span><div class="ex-name">Stiff com Barra</div></div><div class="ex-data">4 × 10</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Stability</span><div class="ex-name">Passada Lateral</div></div><div class="ex-data">4 × 12 / perna</div></div>
-                <div class="ex-row"><div class="ex-info"><span class="ex-label">Isolation</span><div class="ex-name">Elevação Pélvica</div></div><div class="ex-data">4 × 12</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Chain</span><div class="ex-name">Stiff com Barra</div></div><div class="ex-data">4 × 10 REPS</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Stability</span><div class="ex-name">Passada Lateral</div></div><div class="ex-data">4 × 12 / SIDE</div></div>
+                <div class="ex-row"><div class="ex-info"><span class="ex-label">Glutes</span><div class="ex-name">Elevação Pélvica</div></div><div class="ex-data">4 × 12 REPS</div></div>
             </div>
 
-            <div style="margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.02); border-left: 3px solid #ff0000;">
-                <p style="font-size: 0.75rem; color: #888; margin: 0;" data-i18n="gym_tip"><strong>RECUPERAÇÃO OBRIGATÓRIA:</strong> Sono de 7-9h. O treino destrói, o descanso constrói.</p>
+            <div style="margin-top: 40px; padding: 25px; background: rgba(255,255,255,0.02); border-left: 3px solid #ff0000; border-radius: 0 15px 15px 0; text-align: left;">
+                <p style="font-size: 0.8rem; color: #888; margin: 0; line-height: 1.5;" data-i18n="gym_tip">
+                    <strong style="color: #fff; text-transform: uppercase; letter-spacing: 1px;">Status: Recuperação Obrigatória</strong><br>
+                    Sono de 7-9h é o pilar da performance industrial. O treino rompe, o descanso reconstrói.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function tabGym(day, btn) {
+        // Seleciona todos os conteúdos e botões do dashboard específico
+        const container = btn.closest('.gym-dashboard');
+        container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        container.querySelectorAll('.gym-nav-btn').forEach(b => b.classList.remove('active'));
+        
+        // Ativa o alvo
+        const target = document.getElementById('gym-' + day);
+        if(target) target.classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
 
 <script>
     function tabGym(day, btn) {
